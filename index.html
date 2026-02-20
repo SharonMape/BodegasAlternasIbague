@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ibagué Bodegas Alternas</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+body{
+    margin:0;
+    background:#f4f6f9;
+    color:#1f2937;
+}
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.title-icon{
+    width:50px;
+    height:50px;
+    background:#2563eb;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:22px;
+}
+h1{
+    margin:0;
+    font-size:26px;
+}
+.date{
+    font-size:14px;
+    color:#6b7280;
+}
+.btn-primary{
+    border:none;
+    padding:10px 16px;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-top:25px;
+}
+.card{
+    background:white;
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+.card h3{
+    margin:0;
+    font-size:14px;
+    color:#6b7280;
+}
+.card .value{
+    font-size:24px;
+    font-weight:700;
+    margin-top:6px;
+}
+.recommend{
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+    color:white;
+}
+
+/* TABLE */
+.section-title{
+    margin-top:35px;
+    font-size:20px;
+    font-weight:600;
+}
+.table{
+    margin-top:15px;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+.row{
+    display:grid;
+    grid-template-columns:2fr 2fr 2fr 1fr 1fr;
+    column-gap:25px;
+    padding:16px;
+    border-bottom:1px solid #e5e7eb;
+    align-items:center;
+}
+.row.header{
+    background:#f9fafb;
+    font-size:12px;
+    font-weight:600;
+    color:#6b7280;
+}
+.progress{
+    height:6px;
+    background:#e5e7eb;
+    border-radius:6px;
+    margin-top:6px;
+}
+.bar{
+    height:6px;
+    border-radius:6px;
+}
+.green{ background:#22c55e; }
+.red{ background:#ef4444; }
+
+.badge{
+    padding:6px 10px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+}
+.estable{ background:#dcfce7; color:#15803d; }
+.critico{ background:#fee2e2; color:#991b1b; }
+
+.link{
+    color:#2563eb;
+    cursor:pointer;
+    font-weight:600;
+}
+
+/* PANEL */
+.overlay{
+    position:fixed;
+    top:0;
+    right:-720px;
+    width:720px;
+    height:100%;
+    background:#f8fafc;
+    box-shadow:-6px 0 25px rgba(0,0,0,0.15);
+    transition:0.35s;
+    overflow:auto;
+}
+.overlay.active{
+    right:0;
+}
+
+.panel-header{
+    background:white;
+    padding:28px;
+    border-bottom:1px solid #e5e7eb;
+}
+.panel-title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+.alert-icon{
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    background:#fee2e2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+.panel-header h2{
+    margin:0;
+    font-size:26px;
+}
+.panel-sub{
+    margin-top:6px;
+    color:#64748b;
+}
+
+.product-table{
+    background:white;
+    margin:25px;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);
+}
+.p-row{
+    display:grid;
+    grid-template-columns:2fr 3fr 2fr 1fr 1.5fr 1fr;
+    padding:18px 22px;
+    align-items:center;
+    border-bottom:1px solid #eef2f7;
+}
+.p-head{
+    background:linear-gradient(90deg,#0f172a,#1e293b);
+    color:white;
+    font-size:12px;
+    font-weight:600;
+}
+
+.tag{
+    background:#e2e8f0;
+    padding:6px 12px;
+    border-radius:10px;
+    font-size:12px;
+    width:max-content;
+}
+.brand{
+    font-weight:600;
+    color:#334155;
+}
+.days{
+    font-size:13px;
+    font-weight:700;
+}
+
+.panel-footer{
+    display:flex;
+    justify-content:flex-end;
+    padding:20px 28px;
+}
+.review{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:14px 22px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="title">
+<div class="title-icon">🏬</div>
+<div>
+<h1>Sucursal Regional Centro</h1>
+<div class="date">19 de febrero de 2026</div>
+</div>
+</div>
+<button class="btn-primary">Descargar Reporte</button>
+</div>
+
+<div class="cards">
+<div class="card">
+<h3>Bodegas Auditadas</h3>
+<div class="value">5 / 5</div>
+</div>
+
+<div class="card">
+<h3>Cumplimiento Gral.</h3>
+<div class="value">40%</div>
+</div>
+
+<div class="card">
+<h3>Requieren Atención</h3>
+<div class="value">3 Bodegas</div>
+</div>
+
+<div class="card recommend">
+<h3>RECOMENDACIÓN</h3>
+<p>"Revisar bodegas con estado crítico para corregir productos NO CUMPLE."</p>
+</div>
+</div>
+
+<div class="section-title">Listado de Bodegas Auditadas</div>
+
+<div class="table">
+<div class="row header">
+<div>NOMBRE DE BODEGA</div>
+<div>UBICACIÓN</div>
+<div>CAPACIDAD / USO</div>
+<div>ESTADO</div>
+<div>ACCIONES</div>
+</div>
+
+<div class="row">
+<div><b>IBA001-2</b></div>
+<div>Ibagué</div>
+<div>0%<div class="progress"><div class="bar red" style="width:100%"></div></div></div>
+<div><span class="badge critico">Crítico</span></div>
+<div><span class="link" onclick="openPanel('IBA001-2')">Ver detalle</span></div>
+</div>
+
+<div class="row">
+<div><b>IBA001-4</b></div>
+<div>Ibagué</div>
+<div>0%<div class="progress"><div class="bar red" style="width:100%"></div></div></div>
+<div><span class="badge critico">Crítico</span></div>
+<div><span class="link" onclick="openPanel('IBA001-4')">Ver detalle</span></div>
+</div>
+
+<div class="row">
+<div><b>IBA001-5</b></div>
+<div>Ibagué</div>
+<div>0%<div class="progress"><div class="bar red" style="width:100%"></div></div></div>
+<div><span class="badge critico">Crítico</span></div>
+<div><span class="link" onclick="openPanel('IBA001-5')">Ver detalle</span></div>
+</div>
+
+<div class="row">
+<div><b>IBA001-6</b></div>
+<div>Ibagué</div>
+<div>100%<div class="progress"><div class="bar green" style="width:100%"></div></div></div>
+<div><span class="badge estable">Estable</span></div>
+<div><span class="link" onclick="openPanel('IBA001-6')">Ver detalle</span></div>
+</div>
+
+<div class="row">
+<div><b>IBA001-9</b></div>
+<div>Ibagué</div>
+<div>100%<div class="progress"><div class="bar green" style="width:100%"></div></div></div>
+<div><span class="badge estable">Estable</span></div>
+<div><span class="link" onclick="openPanel('IBA001-9')">Ver detalle</span></div>
+</div>
+
+</div>
+</div>
+
+<!-- PANEL DINÁMICO -->
+<div class="overlay" id="panel">
+<div class="panel-header">
+<div class="panel-title">
+<div class="alert-icon">⚠️</div>
+<div>
+<h2>Detalle de Productos</h2>
+<div class="panel-sub" id="panel-sub"></div>
+</div>
+</div>
+</div>
+
+<div class="product-table">
+<div class="p-row p-head">
+<div>Código SAP</div>
+<div>Descripción</div>
+<div>Marca</div>
+<div>Recuento</div>
+<div>Fecha</div>
+<div>Días</div>
+</div>
+
+<div id="productos-body"></div>
+</div>
+
+<div class="panel-footer">
+<button class="review" onclick="closePanel()">Cerrar</button>
+</div>
+</div>
+
+<script>
+function openPanel(bodega){
+const panel = document.getElementById("panel");
+const tabla = document.getElementById("productos-body");
+const titulo = document.getElementById("panel-sub");
+
+panel.classList.add("active");
+tabla.innerHTML = "";
+
+/* IBA001-2 */
+if(bodega === "IBA001-2"){
+titulo.innerText = "Productos NO CUMPLE";
+
+tabla.innerHTML = `
+<div class="p-row">
+<div><span class="tag">144129100582</span></div>
+<div>PERFIL ESTRUCTURAL S/LLO RANURADO 4X4 3.00MTS 1 5/8" C-16 GALV</div>
+<div class="brand">VIE-ELECTRICO</div>
+<div>1</div>
+<div>15/01/2026</div>
+<div class="days">36</div>
+</div>
+
+<div class="p-row">
+<div><span class="tag">144129100583</span></div>
+<div>PERFIL ESTRUCTURAL S/LLO LISO 4X4 3.00MTS 1 5/8" C-16 GALV</div>
+<div class="brand">VIE-ELECTRICO</div>
+<div>1</div>
+<div>15/01/2026</div>
+<div class="days">36</div>
+</div>
+`;
+}
+
+/* IBA001-4 */
+if(bodega === "IBA001-4"){
+titulo.innerText = "Productos NO CUMPLE";
+
+tabla.innerHTML = `
+<div class="p-row">
+<div><span class="tag">141104103033</span></div>
+<div>SALIDA CORDON BLANCO</div>
+<div class="brand">LUMINEX-GALICA 2</div>
+<div>1</div>
+<div>19/02/2026</div>
+<div class="days">1</div>
+</div>
+
+<div class="p-row">
+<div><span class="tag">143116100014</span></div>
+<div>TOMA COAXIAL TV BLANCO</div>
+<div class="brand">LUMINEX-GALICA 2</div>
+<div>1</div>
+<div>19/02/2026</div>
+<div class="days">1</div>
+</div>
+
+<div class="p-row">
+<div><span class="tag">144123100605</span></div>
+<div>INTERRUPTOR SENCILLO CONMUTABLE BLANCO</div>
+<div class="brand">LUMINEX-GALICA 2</div>
+<div>1</div>
+<div>19/02/2026</div>
+<div class="days">1</div>
+</div>
+`;
+}
+
+/* IBA001-5 */
+if(bodega === "IBA001-5"){
+titulo.innerText = "Productos NO CUMPLE";
+
+tabla.innerHTML = `
+<div class="p-row"><div><span class="tag">144129100617</span></div><div>UNION CONDUIT GALVANIZADO IMC 1 1/4"</div><div class="brand">VIE-ELECTRICO</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">144129100572</span></div><div>TAPA 5800 RECTANGULAR METALICA C/ EMPAQUE</div><div class="brand">VIE-ELECTRICO</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">137101103052</span></div><div>TAPA RECTANGULAR GALV 2" X 4" CAL-24</div><div class="brand">ICAFEL</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">144129100620</span></div><div>JUEGO BOQUILLA 3"</div><div class="brand">VIE-ELECTRICO</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">144129100630</span></div><div>GRAPA METALICA 2" DOBLE OJO EMT</div><div class="brand">VIE-ELECTRICO</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">144129100251</span></div><div>CURVA CONDUIT PVC 1/2"</div><div class="brand">GERFOR</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">121103103037</span></div><div>CONECTOR RECTO LIQUID TIGHT 1 1/4"</div><div class="brand">VIE-ELECTRICO</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">109103103013</span></div><div>CABLE CU ILUMINACION 105°C 600V No 18 NEGRO</div><div class="brand">CENTELSA</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">162101105004</span></div><div>BANDEJA SENCILLA VENTILADA 35 CM (14") X 1 RU</div><div class="brand">AXIS</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">144100101062</span></div><div>AISLADOR BARRAJE PLASTICO 51MM HEMBRA C/TORNILLO</div><div class="brand">SPK</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+<div class="p-row"><div><span class="tag">144129100581</span></div><div>ABRAZADERA AJUSTABLE UNISTRUT 4" ZINCADA</div><div class="brand">VIE-ELECTRICO</div><div>1</div><div>12/02/2026</div><div class="days">8</div></div>
+`;
+}
+
+/* BODEGAS ESTABLES */
+if(bodega === "IBA001-6" || bodega === "IBA001-9"){
+titulo.innerText = "Bodega al día / Cumple";
+tabla.innerHTML = `
+<div class="p-row">
+<div style="grid-column: span 6; text-align:center; font-weight:600;">
+✅ Esta bodega se encuentra al día
+</div>
+</div>
+`;
+}
+}
+
+function closePanel(){
+document.getElementById("panel").classList.remove("active");
+}
+</script>
+
+</body>
+</html>
